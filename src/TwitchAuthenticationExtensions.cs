@@ -1,11 +1,12 @@
-using System;
-using Owin;
-
-namespace KatanaContrib.Security.Github
+namespace KatanaContrib.Security.Twitch
 {
-    public static class GithubAuthenticationExtensions
+    using System;
+
+    using Owin;
+
+    public static class TwitchAuthenticationExtensions
     {
-        public static IAppBuilder UseGithubAuthentication(this IAppBuilder app, GithubAuthenticationOptions options)
+        public static IAppBuilder UseTwitchAuthentication(this IAppBuilder app, TwitchAuthenticationOptions options)
         {
             if (app == null)
             {
@@ -16,18 +17,18 @@ namespace KatanaContrib.Security.Github
                 throw new ArgumentNullException("options");
             }
 
-            app.Use(typeof(GithubAuthenticationMiddleware), app, options);
+            app.Use(typeof(TwitchAuthenticationMiddleware), app, options);
             return app;
         }
 
-        public static IAppBuilder UseGithubAuthentication(
+        public static IAppBuilder UseTwitchAuthentication(
             this IAppBuilder app,
             string clientId,
             string clientSecret)
         {
-            return UseGithubAuthentication(
+            return UseTwitchAuthentication(
                 app,
-                new GithubAuthenticationOptions
+                new TwitchAuthenticationOptions
                 {
                     ClientId = clientId,
                     ClientSecret = clientSecret,
